@@ -19,23 +19,26 @@ function App() {
   // <> jsx "fragment"
 
   const messages = [
-    { id: 1, title: "M1", message: "This is M1", colour: "lightcoral" }, 
-    { id: 2, title: "M2", message: "This is M2", colour: "lightblue" }, 
-    { id: 3, title: "M3", message: "This is M3", colour: "lightgreen" } 
+    { id: 1, title: "M1", message: "This is M1", colour: "lightcoral", author:"Aidan" }, 
+    { id: 2, title: "M2", message: "This is M2", colour: "lightblue", author:"Bob" }, 
+    { id: 3, title: "M3", message: "This is M3", colour: "lightgreen", author:"Carol" } 
   ];
   return (
     <>
     {
-      messages.map((message) => {
-        return (
-          <Message 
+      messages.map(message => <Message 
+                                key={ message.id } 
+                                { ...message}/>)
+      /*
+      messages.map(message => <Message 
             key = { message.id }
             title={ message.title }
             message = { message.message }
             colour = { message.colour }
           ></Message>
-        )
-      })
+        
+      )
+      */
     }
     </>
   );

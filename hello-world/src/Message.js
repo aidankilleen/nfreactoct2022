@@ -1,6 +1,8 @@
 import { useState } from "react";
 
-function Message({ title, message, colour }) {
+function Message({ title, message, colour, author }) {
+
+    //const { title, message, colour } = msg;
 
     const [read, setRead] = useState(false);
 
@@ -10,6 +12,7 @@ function Message({ title, message, colour }) {
     };
 
     return (
+
         <div className="box"
             style={{
                 backgroundColor:colour
@@ -17,6 +20,7 @@ function Message({ title, message, colour }) {
             onClick={onClick}
         >
             <h2>{ title }</h2>
+            <h3>{ author }</h3>
             { !read && <p>{ message }</p>}
         </div>
     )
