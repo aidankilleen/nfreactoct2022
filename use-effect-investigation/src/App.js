@@ -1,19 +1,27 @@
+import { useEffect } from 'react';
 import { useState } from 'react';
 import './App.css';
+import RandomUser from './RandomUser';
 
   function App() {
 
-    const [width, setWidth] = useState(50);
-    const [height, setHeight] = useState(50);
+    const [dimensions, setDimensions] = useState({width:50, height:50});
+
+    //const [width, setWidth] = useState(50);
+    //const [height, setHeight] = useState(50);
     const [darkMode, setDarkMode] = useState(false);
+    const [area, setArea] = useState(0);
 
     const calcArea = (w, h) => {
-
       // slow this down 
       const n = [...Array(10000000).keys()].reduce((p, c)=>p+c);
       return w * h;
     }
-    const area = calcArea(width, height);
+
+    useEffect(()=>{
+      setArea(calcArea(dimensions.width, dimensions.height));
+    }, 
+    [dimensions]);
 
     return (
         <div style={{
@@ -26,14 +34,27 @@ import './App.css';
 
             <h1>useEffect Hook Investigation</h1>
 
+            <RandomUser/>
+
             Width:<input 
                     type="number" 
-                    value={width }
-                    onChange={(e)=>setWidth(e.target.value)}/> <br/>
+                    value={ dimensions.width }
+                    onChange={(e)=>setDimensions((prev) => {
+                        return {
+                          ...prev, 
+                          width: e.target.value
+                        }
+                      })
+                    }/> <br/>
             Height:<input 
                     type="number" 
-                    value={ height }
-                    onChange={(e)=>setHeight(e.target.value)}/> <br/>
+                    value={ dimensions.height }
+                    onChange={(e)=>setDimensions((prev)=> {
+                      return {
+                        ...prev, 
+                        height: e.target.value
+                      }
+                    })}/> <br/>
             <hr/>
             { area }
 
