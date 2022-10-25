@@ -11,6 +11,7 @@ function App() {
   return (
     <DarkModeContext.Provider 
       value={ {value:darkMode, setter:setDarkMode }}>
+        
       <div style={{
         color: darkMode? 'white':'black', 
         backgroundColor: darkMode ? 'black': 'white'
