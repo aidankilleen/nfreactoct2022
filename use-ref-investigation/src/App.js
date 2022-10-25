@@ -10,6 +10,8 @@ function App() {
   //const [count, setCount] = useState(0);
   const count = useRef(0);
 
+  const countryRef = useRef();
+  
   useEffect(()=> {
     console.log("useEffect Called.");
     
@@ -20,15 +22,29 @@ function App() {
 
   });
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    alert("submitted");
 
+    console.log(`Name: ${name}`);
+    console.log(`Country: ${countryRef.current.value}`);
+
+  }
   return ( 
     <>
       <h1>useRef Investigation</h1>
 
-      <input value={ name } onChange={e => setName(e.target.value)}/>
       <span>my name is { name }</span>
       <hr/>
       { JSON.stringify(count) }
+      <hr/>
+
+      <form onSubmit={onSubmit}>
+        Name:<input value={ name } onChange={e => setName(e.target.value)}/>
+        Country:<input ref={countryRef}/><br/>
+
+        <input type="submit" value="submit"/>
+      </form>
     </>
   );
 }
