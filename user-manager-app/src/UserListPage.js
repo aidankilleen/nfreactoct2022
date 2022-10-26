@@ -1,19 +1,49 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import { getAllUsers } from './Api';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { ProgressSpinner } from 'primereact/progressspinner';
+
 
 export default function UserListPage() {
 
-    const users = [
-        {id:1, name:"Alice", email:"alice@gmail.com", active: true }, 
-        {id:2, name:"Bob", email:"bob@gmail.com", active: true }, 
-        {id:3, name:"Carol", email:"carol@gmail.com", active: false }, 
-        {id:4, name:"Dan", email:"dan@gmail.com", active: true }, 
-        {id:5, name:"Eve", email:"eve@gmail.com", active: false } 
-    ];
+    const { data:users, error, isLoading, isError } = 
+        useQuery("users", getAllUsers);
+
+    if (isLoading) {
+        return (
+            <div style={{display:"flex"}}>
+                <ProgressSpinner 
+                    style={{
+                        width: '50px', 
+                        height: '50px',
+                        margin: "auto"}} strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"/>
+            </div>
+        )
+    }
+
+    if (isError) {
+        return <div>Error:{ error.message }</div>
+    }
+
+    
   return (
     <div>
-        <h2>UserListPage</h2>
-
-        { JSON.stringify(users)}
+        <DataTable loading={isLoading} value={ users }>
+        <Column 
+              body={user =><Link to={`${ user.id }`}>{user.id}</Link>} 
+              header="Id">
+              
+            </Column>
+            <Column field="name" header="Name"></Column>
+            <Column field="email" header="Email"></Column>
+            <Column body={(user)=>{
+              return user.active ? "Active": "Inactive"
+            }} header="Active"></Column>
+        </DataTable>
+        
     </div>
   )
 }

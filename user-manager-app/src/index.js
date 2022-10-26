@@ -7,20 +7,29 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import HomePage from './HomePage';
 import ContactPage from './ContactPage';
 import AboutPage from './AboutPage';
+import UserListPage from './UserListPage';
+import UserDetailPage from './UserDetailPage';
+import {QueryClient, QueryClientProvider} from 'react-query';
+
+const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<App/>}>
-          <Route index element={<Navigate to="/home"/>}/>
-          <Route path="/home" element={<HomePage/>}/>
-          <Route path="/about" element={<AboutPage/>}/>
-          <Route path="/contact" element={<ContactPage/>}/>
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <QueryClientProvider client={ queryClient }>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<App/>}>
+            <Route index element={<Navigate to="/home"/>}/>
+            <Route path="/home" element={<HomePage/>}/>
+            <Route path="/about" element={<AboutPage/>}/>
+            <Route path="/contact" element={<ContactPage/>}/>
+            <Route path="/users" element={<UserListPage/>}/>
+            <Route path="/users/:id" element={<UserDetailPage/>}/>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 

@@ -1,16 +1,41 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { Menubar } from 'primereact/menubar';
+
+import "primereact/resources/themes/md-light-deeppurple/theme.css";
+import "primereact/resources/primereact.min.css";                  //core css
+import "primeicons/primeicons.css";                                //icons
 import './App.css';
 
 function App() {
+
+  const navigate = useNavigate();
+
+  const items = [
+    {
+      label: "Home",
+      command: ()=>navigate("/home")
+    }, 
+    {
+      label: "About",
+      command: ()=>navigate("/about")
+    }, 
+    {
+      label: "Contact Us",
+      command: ()=>navigate("/contact")
+
+    }, 
+    {
+      label: "Users",
+      command: ()=>navigate("/users")
+
+    }, 
+  ];
   return (
     <>
-      <h1>User Manager App</h1>
-      <nav>
-        <Link to="/home">Home Page</Link> |
-        <Link to="/about">About</Link> | 
-        <Link to="/contact">Contact Us</Link>
-      </nav>
-      <hr/>
+      <Menubar 
+        start = {<i class="pi pi-users" style={{'fontSize': '2em'}}></i>}
+        model={items}/>
+
       <Outlet/>
 
     </>
