@@ -2,16 +2,20 @@ import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useMemo } from 'react';
 
 function App() {
 
   const [darkMode, setDarkMode] = useState(false);
   const [count, setCount] = useState(0);
 
-  const styles = {
-    color: darkMode ? 'white' : 'black', 
-    backgroundColor: darkMode ? 'black' : 'white'
-  }
+  const styles = useMemo(()=> {
+    return {
+      color: darkMode ? 'white' : 'black', 
+      backgroundColor: darkMode ? 'black' : 'white'
+    }
+  }, [darkMode]);
+
   useEffect(()=> {
     alert("Theme was changed");
   }, [styles]);
