@@ -32,11 +32,21 @@ export default function UserListPage() {
   return (
     <div>
         <DataTable loading={isLoading} value={ users }>
+            
         <Column 
               body={user =><Link to={`${ user.id }`}>{user.id}</Link>} 
               header="Id">
               
             </Column>
+            
+            <Column 
+                body={user =>
+                    <Link 
+                        to={`/userwithobject/${ user.id }`}
+                        state={{ user }}>
+                    {user.id}
+                    </Link>} 
+              header="Id"></Column>
             <Column field="name" header="Name"></Column>
             <Column field="email" header="Email"></Column>
             <Column body={(user)=>{

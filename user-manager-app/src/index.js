@@ -10,6 +10,7 @@ import AboutPage from './AboutPage';
 import UserListPage from './UserListPage';
 import UserDetailPage from './UserDetailPage';
 import {QueryClient, QueryClientProvider} from 'react-query';
+import UserWithObjectDetailPage from './UserWithObjectDetail';
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ root.render(
             <Route path="/contact" element={<ContactPage/>}/>
             <Route path="/users" element={<UserListPage/>}/>
             <Route path="/users/:id" element={<UserDetailPage/>}/>
+            <Route path="/userwithobject/:id" element={<UserWithObjectDetailPage/>}/>
           </Route>
         </Routes>
       </BrowserRouter>
