@@ -29,12 +29,6 @@
       "name": "Eve",
       "email": "eve@gmail.com",
       "active": false
-    },
-    {
-      "name": "New User",
-      "email": "new.user@gmail.com",
-      "active": false,
-      "id": 6
     }
   ]
 }
